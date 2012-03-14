@@ -7,7 +7,7 @@ rule state.
 
     $ check_cepmon --help
     Options:
-    --cepmon, -c <s>:   cepmon host:port
+      --cepmon, -c <s>:   cepmon host:port
         --rule, -r <s>:   rule name to filter on
         --host, -h <s>:   host name to filter on
             --help, -e:   Show this message
