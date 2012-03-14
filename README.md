@@ -1,29 +1,17 @@
-# Cepmon::Nagios
+# cepmon-nagios
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'cepmon-nagios'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install cepmon-nagios
+A Nagios plugin to monitor [cepmon](https://github.com/fetep/cepmon)
+rule state.
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ check_cepmon --help
+    Options:
+    --cepmon, -c <s>:   cepmon host:port
+        --rule, -r <s>:   rule name to filter on
+        --host, -h <s>:   host name to filter on
+            --help, -e:   Show this message
 
-## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+    $ check_cepmon -c localhost:8989 -r sync_503
+    CRITICAL: rule sync_503 has 2 hosts alerting: zlb2_pub (3.93 > 0.1 503s/second for 1 min since 2012-03-13/09:51), zlb1_pub (4.13 > 0.1 503s/second for 1 min since 2012-03-13/09:51)
