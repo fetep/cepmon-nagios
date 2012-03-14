@@ -14,4 +14,6 @@ rule state.
 
 
     $ check_cepmon -c localhost:8989 -r sync_503
-    CRITICAL: rule sync_503 has 2 hosts alerting: zlb2_pub (3.93 > 0.1 503s/second for 1 min since 2012-03-13/09:51), zlb1_pub (4.13 > 0.1 503s/second for 1 min since 2012-03-13/09:51)
+    CRITICAL: rule sync_503 has 2 hosts alerting: zlb2_pub (3.93 > 0.1
+    503s/second for 1 min since 2012-03-13/09:51), zlb1_pub (4.13 > 0.1
+    503s/second for 1 min since 2012-03-13/09:51)
