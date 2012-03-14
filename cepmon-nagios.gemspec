@@ -4,7 +4,7 @@ require File.expand_path('../lib/cepmon-nagios/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Pete Fritchman"]
   gem.email         = ["petef@databits.net"]
-  gem.description   = %q{Nagios plugin to check cepmon rules}
+  gem.summary       = %q{Nagios plugin to check cepmon rules}
   gem.homepage      = "https://github.com/fetep/cepmon-nagios"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
