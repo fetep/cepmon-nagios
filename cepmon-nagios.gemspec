@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/cepmon-nagios/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Pete Fritchman"]
@@ -12,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "cepmon-nagios"
   gem.require_paths = ["lib"]
-  gem.version       = Cepmon::Nagios::VERSION
+  gem.version       = "0.1.0"
 
   gem.add_runtime_dependency "bundler"
   gem.add_runtime_dependency "json"
