@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+# Nagios plugin to monitor cepmon rules.
+
+require "rubygems"
+require "bundler/setup"
+
+require "json"
+require "net/http"
+require "trollop"
+require "uri"
+
+opts = Trollop::options do
+    opt :cepmon, "cepmon host:port",
+        :short => "-c", :required => true, :type => :string
+    opt :rule, "rule name to filter on",
+        :short => "-r", :required => true, :type => :string
+    opt :host, "host name to filter on",
+        :short => "-h", :type => :string
+end
+
+cepmon_uri = URI.join("http://" + opts[:cepmon], "/alerts.json")
+uri_params = { :rule => URI.escape(opts[:rule]) }
+if opts[:host]
+    uri_params[:host] = URI.escape(opts[:host])
+end
+cepmon_uri.query = uri_params.collect { |k, v| [k, v].join("=") }.join("&")
+
+begin
+    alerts_json = Net::HTTP.get_response(cepmon_uri)
+    alerts = JSON.parse(alerts_json.body)
+rescue Net::HTTPExceptions
+    $stderr.puts "UNKNOWN: error fetching #{cepmon_uri.to_s}: #{$!}"
+    exit 3
+rescue JSON::ParserError
+    $stderr.puts "UNKNOWN: error parsing JSON from #{cepmon_uri.to_s}: #{$!}"
+    exit 3
+end
+
+if !alerts.is_a?(Hash) or !alerts["alerts"].is_a?(Array)
+    $stderr.puts "UNKNOWN: error parsing JSON from #{cepmon_uri.to_s}: " +
+                 "missing alerts field"
+    exit 3
+end
+
+if alerts["alerts"].length == 0
+    $stderr.puts "OK: no cepmon alerts"
+    exit 0
+end
+
+msg = []
+alerts["alerts"].each do |alert|
+    since = Time.at(alert['started']).strftime('%F/%R')
+    msg << "#{alert['host']} (#{alert['reason']} since #{since})"
+end
+
+if opts[:host]
+    puts "CRITICAL: rule #{opts[:rule]} alerting: " +
+        msg.join(", ")
+else
+    puts "CRITICAL: rule #{opts[:rule]} has #{msg.length} " +
+        (msg.length > 1 ? "hosts" : "host") + " alerting: " +
+        msg.join(", ")
+end
+exit 2
