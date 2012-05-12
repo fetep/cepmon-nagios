@@ -50,7 +50,7 @@ end
 msg = []
 alerts["alerts"].each do |alert|
     since = Time.at(alert['started']).strftime('%F/%R')
-    msg << "#{alert['host']} (#{alert['reason']} since #{since})"
+    msg << "#{alert['cluster']}/#{alert['host']} (#{alert['reason']} since #{since})"
 end
 
 if opts[:host]
