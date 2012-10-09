@@ -43,7 +43,7 @@ if !alerts.is_a?(Hash) or !alerts["alerts"].is_a?(Array)
 end
 
 if alerts["alerts"].length == 0
-    $stderr.puts "OK: no cepmon alerts"
+    puts "OK: no cepmon alerts"
     exit 0
 end
 
