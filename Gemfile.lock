@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cepmon-nagios (0.0.1)
+    cepmon-nagios (0.1.3)
       bundler
       json
       trollop
@@ -9,9 +9,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    json (1.6.5)
-    json (1.6.5-java)
-    trollop (1.16.2)
+    json (1.7.5)
+    trollop (2.0)
 
 PLATFORMS
   java
